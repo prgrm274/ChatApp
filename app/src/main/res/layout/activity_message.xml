@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MessageActivity">
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/bar_layout_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/MenuStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/profile_image_circle_message"/>
+            <TextView
+                android:id="@+id/tv_username_message"
+                android:layout_marginLeft="30dp"
+                android:textColor="#DAD1D1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- Sab 26-01-19 223413: todo 7 -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_message"
+        android:layout_above="@id/bottom_message"
+        android:layout_below="@id/bar_layout_message"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/bottom_message"
+        android:padding="10dp"
+        android:background="#EBF8EE"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/edit_text_send"
+            android:padding="4dp"
+            android:layout_marginLeft="2dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/type_a_message"
+            android:layout_toLeftOf="@+id/btn_send"
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/btn_send"
+            android:layout_marginStart="2dp" />
+
+        <ImageButton
+            android:id="@+id/btn_send"
+            android:background="@drawable/ic_send"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:contentDescription="@string/image_button" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
+<!-- Sab 26-01-19 214659: Sab 21:46:40 26 Jan 2019
+    todo tutorial 6 getting ready to chat  -->

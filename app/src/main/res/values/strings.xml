@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Chat</string>
+    <string name="action_settings">Settings</string>
+    <string name="username">username</string>
+    <string name="make_a_new_account">Make a new account</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="register">register</string>
+    <string name="login">login</string>
+    <string name="login_account">login account</string>
+    <string name="logout">logout</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="type_a_message">type a message</string>
+    <string name="image_button">Image Button</string>
+    <string name="chat_item_left">chat item left</string>
+    <string name="chat_item_right">chat item right</string>
+    <string name="profile">Profile</string>
+</resources>

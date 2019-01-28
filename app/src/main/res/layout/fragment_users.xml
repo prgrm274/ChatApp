@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EF9A9A"
+    tools:context=".fragments.UsersFragment">
+
+    <!-- Sab 26-01-19 140700:  -->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_users"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

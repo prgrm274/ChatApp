@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_alignParentEnd="true"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="wrap_content"
+            android:id="@+id/profile_image"
+            android:visibility="gone"
+            android:layout_height="wrap_content" />
+
+        <!-- Min 27-01-19 094647: todo 8 pay attention, this chat_item_right TextView is different, so it's id is used when you login and look your own messages, so it's id differentiated by "show_message_tv_chat_right" -->
+        <TextView
+            android:id="@+id/show_message"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:text="@string/chat_item_right"
+            android:background="@drawable/background_right"
+            android:padding="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+</RelativeLayout>
+
+    <!-- Min 27-01-19 082314: todo 8 -->

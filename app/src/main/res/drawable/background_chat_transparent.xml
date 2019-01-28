@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:dither="true" android:innerRadius="4dp" android:thickness="2dp" android:shape="rectangle">
+
+    <gradient
+        android:type="linear"
+        android:angle="90"
+        android:startColor="#E6FFFFFF"
+        android:centerColor="#E0F7C6"
+        android:endColor="#40FFFFFF" />
+
+    <corners android:radius="6dp" />
+
+    <padding
+        android:bottom="10dp"
+        android:left="10dp"
+        android:right="10dp"
+        android:top="10dp" />
+
+</shape>
+
+<!-- Min 27-01-19 082929:  -->

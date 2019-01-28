@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!-- Sab 26-01-19 124204:  -->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!-- Sab 26-01-19 124405: todo include is same like you make toolbar view here, more code efficient. just reminder -->
+        <!--<include android:id="@+id/toolbar" layout="@layout/bar_layout" />-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="@color/colorPrimaryDark"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/MenuStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/profile_image_circle_main"/>
+            <TextView
+                android:id="@+id/tv_username_main"
+                android:layout_marginLeft="30dp"
+                android:textColor="#DAD1D1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <!-- Sab 26-01-19 132412:  -->
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout_main"
+            app:tabSelectedTextColor="#C5E1A5"
+            app:tabIndicatorColor="#80CBC4"
+            app:tabTextColor="#fff"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!-- Sab 26-01-19 214932: sebelumnya salah taruh tab_layout_main di sini tapi kok run normal semua  -->
+
+    <!-- Sab 26-01-19 134246:  -->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+</LinearLayout>
