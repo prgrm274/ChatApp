@@ -13,8 +13,7 @@ Features:
 
 ----
 
-![Screenshot](login view.png)
-![Screenshot](chats.png)
+![Screenshot](login view.png) ![Screenshot](chats.png)
 
 
 ![Screenshot](register.mp4)
