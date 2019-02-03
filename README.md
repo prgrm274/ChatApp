@@ -2,6 +2,7 @@
 Awesome chat app
 
 Features:
+
 > - `register` and `login` user
 > - `send` message
 > - `receive` message
@@ -12,7 +13,7 @@ Features:
 > - `message status` (seen and delivered)
 
 
-![Screenshot](login+view.png) 
+![Screenshot](loginview.png) 
 
 ![Screenshot](chats.png)
 
