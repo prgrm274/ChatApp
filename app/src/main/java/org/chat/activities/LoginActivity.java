@@ -1,4 +1,4 @@
-package org.chat;
+package org.chat.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,25 +8,25 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-/** Sab 12:05:05 26 Jan 2019
+import org.chat.R;
 
-*/
 public class LoginActivity extends AppCompatActivity {
 
     Button loginBtn;
     MaterialEditText email, password;
 
     FirebaseAuth auth;
+
+    TextView forgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,14 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         loginBtn = findViewById(R.id.login_button);
+        forgotPassword = findViewById(R.id.forgot_password);
 
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+            }
+        });
 
         auth = FirebaseAuth.getInstance();
 

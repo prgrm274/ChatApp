@@ -13,7 +13,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -33,11 +34,17 @@ dependencies {
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
 
     implementation 'com.google.firebase:firebase-auth:16.1.0'
-    implementation 'com.google.android.gms:play-services-auth:16.0.1'   //email auth
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.6'
-    implementation 'com.google.firebase:firebase-core:16.0.6'
-    implementation 'com.google.firebase:firebase-storage:16.0.5'//Sen 20:12:56 28 Januari 2019 todo 11
+    implementation 'com.google.firebase:firebase-core:16.0.7'
+    implementation 'com.google.firebase:firebase-storage:16.0.5'
 
-    implementation 'de.hdodenhof:circleimageview:2.2.0'//Sab 12:45:09 26 Januari 2019
-    implementation 'com.github.bumptech.glide:glide:4.8.0'//Sab 12:57:29 26 Januari 2019
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.google.firebase:firebase-messaging:17.3.4'
+
 }

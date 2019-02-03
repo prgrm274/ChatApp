@@ -1,7 +1,5 @@
 package org.chat.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -18,18 +16,18 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.chat.R;
 import org.chat.adapters.UsersAdapter;
 import org.chat.models.Chat;
+import org.chat.models.Chatlist;
 import org.chat.models.User;
+import org.chat.notifications.models.NotifToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/** Sab 13:54:51 26 Jan 2019
-    todo 9
-*/ 
 public class ChatsFragment extends Fragment {
 
     private static final String TAG = "Chats Fragment";
@@ -41,7 +39,7 @@ public class ChatsFragment extends Fragment {
     FirebaseUser firebaseUser;
     DatabaseReference reference;
 
-    private List<String> usersList;
+    private List<Chatlist> usersList;
 
     public ChatsFragment() {}
 
@@ -57,25 +55,17 @@ public class ChatsFragment extends Fragment {
 
         usersList = new ArrayList<>();
 
-        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        reference = FirebaseDatabase.getInstance().getReference("Chatlist").child(firebaseUser.getUid());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 usersList.clear();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Chat chat = snapshot.getValue(Chat.class);
-
-                    if (chat.getSender().equals(firebaseUser.getUid())) {
-                        usersList.add(chat.getReceiver());
-                    }
-
-                    if (chat.getReceiver().equals(firebaseUser.getUid())) {
-                        usersList.add(chat.getSender());
-                    }
+                    Chatlist chatlist = snapshot.getValue(Chatlist.class);
+                    usersList.add(chatlist);
                 }
-
-                readChats();
+                chatListMethod();
             }
 
             @Override
@@ -84,10 +74,20 @@ public class ChatsFragment extends Fragment {
             }
         });
 
+        updateToken(FirebaseInstanceId.getInstance().getToken());
+
         return view;
     }
 
-    private void readChats() {
+
+    private void updateToken(String token) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Tokens");
+        NotifToken token1 = new NotifToken(token);
+        reference.child(firebaseUser.getUid()).setValue(token1);
+    }
+
+
+    private void chatListMethod() {
         mUsers = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -99,30 +99,14 @@ public class ChatsFragment extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     User user = snapshot.getValue(User.class);
 
-                    for (String id : usersList) {
-
-                        if (user.getId().equals(id)) {
-
-                            if (mUsers.size() != 0) {
-
-                                for (User user1 : mUsers) {
-
-                                    if (!user.getId().equals(user1.getId())) {
-                                        mUsers.add(user);
-                                    }
-
-                                }
-
-                            } else {
-                                mUsers.add(user);
-                            }
-
+                    for (Chatlist chatlist : usersList) {
+                        if (user.getId().equals(chatlist.getId())) {
+                            mUsers.add(user);
                         }
-
                     }
                 }
 
-                usersAdapter = new UsersAdapter(getContext(), mUsers);
+                usersAdapter = new UsersAdapter(getContext(), mUsers, true);
                 recyclerView.setAdapter(usersAdapter);
             }
 

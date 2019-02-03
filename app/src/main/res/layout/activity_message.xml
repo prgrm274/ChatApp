@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MessageActivity">
+    tools:context=".activities.MessageActivity">
 
 
     <android.support.design.widget.AppBarLayout
@@ -36,7 +36,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!-- Sab 26-01-19 223413: todo 7 -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_message"
         android:layout_above="@id/bottom_message"
@@ -67,7 +66,7 @@
 
         <ImageButton
             android:id="@+id/btn_send"
-            android:background="@drawable/ic_send"
+            android:background="@drawable/ic_search"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_alignParentTop="true"
@@ -79,5 +78,3 @@
     </RelativeLayout>
 
 </RelativeLayout>
-<!-- Sab 26-01-19 214659: Sab 21:46:40 26 Jan 2019
-    todo tutorial 6 getting ready to chat  -->

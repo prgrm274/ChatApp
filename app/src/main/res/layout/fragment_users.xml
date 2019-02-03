@@ -3,11 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#EF9A9A"
+    android:background="@drawable/background_right"
     tools:context=".fragments.UsersFragment">
 
-    <!-- Sab 26-01-19 140700:  -->
+
+    <EditText
+        android:drawableStart="@drawable/ic_search"
+        android:background="@drawable/background_chat_transparent"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textColor="#00838F"
+        android:id="@+id/search_users_edit_text_users_fragment"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:hint="@string/search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@mipmap/ic_launcher" />
+
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/search_users_edit_text_users_fragment"
+        android:layout_marginTop="10dp"
         android:id="@+id/recyclerview_users"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -1,18 +1,25 @@
 package org.chat.models;
 
-/** Min 08:55:34 27 Jan 2019
-    todo 8
-*/
 public class Chat {
 
     private String sender;
     private String receiver;
     private String message;
+    private boolean isseen;
 
-    public Chat(String sender, String receiver, String message) {
+    public boolean isIsseen() {
+        return isseen;
+    }
+
+    public void setIsseen(boolean isseen) {
+        this.isseen = isseen;
+    }
+
+    public Chat(String sender, String receiver, String message, boolean isseen) {
         this.sender = sender;
         this.receiver = receiver;
         this.message = message;
+        this.isseen = isseen;
     }
 
     public Chat() {

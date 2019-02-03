@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterAct">
+    tools:context=".activities.RegisterActivity">
 
-    <!-- Sab 26-01-19 113904:  -->
     <include
         android:id="@+id/toolbar"
         layout="@layout/bar_layout" />

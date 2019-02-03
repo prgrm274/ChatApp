@@ -41,9 +41,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
 
-/** Min 21:36:16 27 Jan 2019
-    todo 10
-*/
 public class ProfileFragment extends Fragment {
 
     public ProfileFragment() {}
@@ -54,9 +51,6 @@ public class ProfileFragment extends Fragment {
     DatabaseReference reference;
     FirebaseUser firebaseUser;
 
-    /* Sen 20:37:31 28 Jan 2019
-       todo 12
-    */
     StorageReference storageReference;
     private static final int IMAGE_REQUEST = 1;
     private Uri imageUri;
@@ -70,9 +64,7 @@ public class ProfileFragment extends Fragment {
         imageProfile = view.findViewById(R.id.profile_image);
         username = view.findViewById(R.id.username);
 
-
-        storageReference = FirebaseStorage.getInstance().getReference("uploads");//Sen 20:39:14 28 Januari 2019 todo 11
-
+        storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -96,9 +88,6 @@ public class ProfileFragment extends Fragment {
         });
 
 
-        /* Sen 20:39:50 28 Jan 2019
-           todo 11
-        */
         imageProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,9 +99,6 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    /* Sen 20:40:17 28 Jan 2019
-       todo 11
-    */
     private void openImage() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -121,18 +107,12 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    /* Sen 20:42:03 28 Jan 2019
-       todo 11
-    */
     private String getFileExt(Uri uri) {
         ContentResolver contentResolver = getContext().getContentResolver();
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
-    /* Sen 20:44:41 28 Jan 2019
-           todo 11
-        */
     private void uploadImage() {
         final ProgressDialog progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Uploading");
@@ -156,8 +136,7 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
-                        Uri downloadUri = (Uri) task.getResult();
-//                        Uri downloadUri = task.getResult();   // asli tutorial
+                        Uri downloadUri = task.getResult();
                         String mUri = downloadUri.toString();
 
                         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
@@ -189,17 +168,13 @@ public class ProfileFragment extends Fragment {
     }
 
 
-    /* Sen 20:59:55 28 Jan 2019
-       todo 11
-    */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK
                 && data != null
-                && data.getData() != null) {  // RESULT_OK asli
-//        if (requestCode == IMAGE_REQUEST && resultCode == Activity.RESULT_OK) {
+                && data.getData() != null) {
 
             imageUri = data.getData();
 

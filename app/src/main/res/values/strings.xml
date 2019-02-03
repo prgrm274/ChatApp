@@ -17,4 +17,10 @@
     <string name="chat_item_left">chat item left</string>
     <string name="chat_item_right">chat item right</string>
     <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+    <string name="your_email">Your email</string>
+    <string name="reset">reset</string>
+    <string name="last_message">last message</string>
+    <string name="no_message">No message</string>
 </resources>

@@ -14,7 +14,6 @@
     <!--</style>-->
 
 
-    <!-- Sab 26-01-19 123852:  -->
     <style name="MenuStyle" parent="Theme.AppCompat.Light">
         <item name="android:background">@android:color/white</item>
     </style>

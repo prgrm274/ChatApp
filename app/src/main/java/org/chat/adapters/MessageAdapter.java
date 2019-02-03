@@ -19,9 +19,6 @@ import org.chat.models.Chat;
 
 import java.util.List;
 
-/** Min 08:50:42 27 Jan 2019
-    todo 8 just copy from {@link UsersAdapter} then change what requires to change
-*/
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
 
     public static final int MSG_TYPE_LEFT = 0;//8
@@ -31,37 +28,33 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     private List<Chat> mChats;
     private String mImageURL;
 
-    /* Min 09:05:41 27 Jan 2019
-       todo 8 FirebaseUser
-    */
     FirebaseUser firebaseUser;
+
 
     public MessageAdapter(Context ctx, List<Chat> chats, String imageURL) {
         this.mContext = ctx;
         this.mChats = chats;
         this.mImageURL = imageURL;
-
-        /* Min 10:02:45 27 Jan 201
-           todo 8 coba lacak by log
-        */
-        Log.i(imageURL.toString(), " constructor");
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView showMessage;
-        public ImageView profileImage;  // serius, di tutorial is ImageView
-//        public CircleImageView profileImage;
+        public ImageView profileImage;
+        public TextView textSeen;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             showMessage = itemView.findViewById(R.id.show_message);
             profileImage = itemView.findViewById(R.id.profile_image);
+            textSeen = itemView.findViewById(R.id.text_seen);
 
             Log.i(showMessage.toString(), " class ViewHolder");
             Log.i(profileImage.toString(), " class ViewHolder");
         }
     }
+
 
     @NonNull
     @Override
@@ -73,7 +66,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             Log.i(view.toString(), " onCreateViewHolder");
 
             return new MessageAdapter.ViewHolder(view);
-        } else {//if (viewType == MSG_TYPE_LEFT) {
+        } else {
             View view = LayoutInflater.from(mContext).inflate(
                     R.layout.chat_item_left, root, false);
 
@@ -92,11 +85,27 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         Log.i(holder.showMessage.toString(), " onBindViewHolder");
 
         if (mImageURL.equals("default")) {
-            holder.profileImage.setImageResource(R.mipmap.ic_launcher);
+
+            holder.profileImage.setImageResource(R.drawable.icon_48);
+
         } else {
+
             Glide.with(mContext).load(mImageURL).into(holder.profileImage);
+
         }
 
+
+        if (position == mChats.size() - 1) {
+
+            if (chat.isIsseen()) {
+                holder.textSeen.setText("SEEN");
+            } else {
+                holder.textSeen.setText("delivered");
+            }
+
+        } else {
+            holder.textSeen.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -105,9 +114,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
 
-    /* Min 09:06:46 27 Jan 2019
-       todo 8 getItemViewType
-    */
     @Override
     public int getItemViewType(int position) {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();

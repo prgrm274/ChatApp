@@ -1,37 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/common_full_open_on_phone"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/icon_512"
     android:gravity="center"
-    tools:context=".StartAct">
+    android:orientation="vertical"
+    tools:context=".activities.StartActivity">
 
-    <!-- Sab 26-01-19 121558:  -->
-
-    <TextView
-        android:text="@string/app_name"
-        android:padding="40dp"
-        android:textSize="40sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/start_login_btn"
-        android:textColor="#fff"
-        android:background="#43A047"
+        android:layout_width="160dp"
+        android:layout_height="80dp"
+        android:background="#CC43A047"
         android:text="@string/login"
-        android:layout_width="200dp"
-        android:layout_height="80dp" />
+        android:textColor="#fff" />
 
     <Button
-        android:layout_marginTop="40dp"
         android:id="@+id/start_reg_btn"
-        android:textColor="#fff"
-        android:background="#C0CA33"
-        android:layout_width="200dp"
+        android:layout_width="160dp"
         android:layout_height="80dp"
-        android:text="@string/register" />
+        android:layout_marginTop="40dp"
+        android:background="#CEA166"
+        android:text="@string/register"
+        android:textColor="#fff" />
 
 </LinearLayout>

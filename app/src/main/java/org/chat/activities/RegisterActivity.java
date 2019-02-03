@@ -1,4 +1,4 @@
-package org.chat;
+package org.chat.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -19,9 +19,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import org.chat.R;
+
 import java.util.HashMap;
 
-public class RegisterAct extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     Button registerBtn;
     MaterialEditText username, email, password;
@@ -58,9 +60,9 @@ public class RegisterAct extends AppCompatActivity {
                 if (TextUtils.isEmpty(txtUsername) ||
                         TextUtils.isEmpty(txtEmail) ||
                         TextUtils.isEmpty(txtPassword)) {
-                    Toast.makeText(RegisterAct.this, "all fields are required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "all fields are required", Toast.LENGTH_SHORT).show();
                 } else if (txtPassword.length() < 6) {
-                    Toast.makeText(RegisterAct.this, "password must be at least 6 chars", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "password must be at least 6 chars", Toast.LENGTH_SHORT).show();
                 } else {
                     register(txtUsername, txtEmail, txtPassword);
                 }
@@ -86,12 +88,14 @@ public class RegisterAct extends AppCompatActivity {
                             hashMap.put("id", userId);
                             hashMap.put("showMessage", username);
                             hashMap.put("imageURL", "default");
+                            hashMap.put("status", "offline");
+                            hashMap.put("search", username.toLowerCase());
 
                             reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Intent intent = new Intent(RegisterAct.this, MainActivity.class);
+                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();
@@ -99,7 +103,7 @@ public class RegisterAct extends AppCompatActivity {
                                 }
                             });
                         } else {
-                            Toast.makeText(RegisterAct.this, "Can not register with that email and password", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this, "Can not register with that email and password", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

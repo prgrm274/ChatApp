@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity">
 
-    <!-- Sab 26-01-19 113904:  -->
     <include
         android:id="@+id/toolbar"
         layout="@layout/bar_layout" />
@@ -58,6 +57,16 @@
             android:layout_marginTop="10dp"
             android:textColor="#fff"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/forgot_password"
+            android:text="@string/forgot_your_password"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:textSize="20sp"
+            android:textColor="#D5C0C0"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
     </LinearLayout>

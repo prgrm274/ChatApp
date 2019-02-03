@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ChatsFragment">
 
-    <!-- Min 27-01-19 105857: todo 9 -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview_fragment_chats"
         android:layout_width="match_parent"

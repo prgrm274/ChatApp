@@ -22,6 +22,12 @@
         android:layout_toEndOf="@+id/profile_image"
         android:layout_marginStart="4dp" />
 
+    <TextView
+        android:id="@+id/text_seen"
+        android:visibility="gone"
+        android:layout_below="@+id/show_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </RelativeLayout>
 
-    <!-- Min 27-01-19 082314: todo 8 -->

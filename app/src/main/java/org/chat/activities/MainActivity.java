@@ -1,4 +1,4 @@
-package org.chat;
+package org.chat.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -24,9 +24,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.chat.R;
 import org.chat.fragments.ChatsFragment;
 import org.chat.fragments.ProfileFragment;
 import org.chat.fragments.UsersFragment;
+import org.chat.models.Chat;
 import org.chat.models.User;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ import java.util.HashMap;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Sab 11:54:44 26 Jan 2019
+ * prgrm274
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -69,10 +71,13 @@ public class MainActivity extends AppCompatActivity {
                 username.setText(user.getUsername());
 
                 if (user.getImageURL().equals("default")) {
-                    profileImage.setImageResource(R.mipmap.ic_launcher);
+
+                    profileImage.setImageResource(R.drawable.icon_48);
+
                 } else {
-                    Glide.with(MainActivity.this.getApplicationContext()).load(user.getImageURL()).into(profileImage);//Sab 21:30:04 26 Januari 2019
-//                    Glide.with(MainActivity.this).load(user.getImageURL()).into(profileImage);
+
+                    Glide.with(getApplicationContext()).load(user.getImageURL()).into(profileImage);
+
                 }
             }
 
@@ -83,21 +88,47 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        /* Sab 13:45:22 26 Jan 2019
-           todo tablayout
-        */
-        TabLayout tabLayout = findViewById(R.id.tab_layout_main);
-        ViewPager viewPager = findViewById(R.id.view_pager_main);
-
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
-        viewPagerAdapter.addFragment(new UsersFragment(), "Users");
-        viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");//Min 21:46:33 27 Januari 2019 todo 10
+        final TabLayout tabLayout = findViewById(R.id.tab_layout_main);
+        final ViewPager viewPager = findViewById(R.id.view_pager_main);
 
 
-        viewPager.setAdapter(viewPagerAdapter);
+        reference = FirebaseDatabase.getInstance().getReference("Chats");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
-        tabLayout.setupWithViewPager(viewPager);
+                int unread = 0;
+
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Chat chat = snapshot.getValue(Chat.class);
+
+                    if (chat.getReceiver().equals(firebaseUser.getUid())
+                            & !chat.isIsseen()) {
+                        unread++;
+                    }
+                }
+
+                if (unread == 0) {
+                    viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
+                } else {
+                    viewPagerAdapter.addFragment(new ChatsFragment(), "(" +unread+ ") unread");// improvement
+                }
+
+                viewPagerAdapter.addFragment(new UsersFragment(), "Users");
+                viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
+
+                viewPager.setAdapter(viewPagerAdapter);
+
+                tabLayout.setupWithViewPager(viewPager);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 
@@ -107,23 +138,22 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout_menu:
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this, StartAct.class));
+
+                startActivity(new Intent(MainActivity.this, StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
                 return true;
         }
         return false;
     }
 
-    /* Sab 13:46:17 26 Jan 2019
-       todo viewPager
-    */
-    class ViewPagerAdapter extends FragmentPagerAdapter {
 
+    class ViewPagerAdapter extends FragmentPagerAdapter {
         private ArrayList<Fragment> fragments;
         private ArrayList<String> titles;
 
@@ -156,9 +186,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /* Sen 21:22:47 28 Jan 2019
-       todo 12
-    */
     private void status(String status) {
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
@@ -169,7 +196,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /* Sen 21:26:07 28 Jan 2019
-       todo 12
-    */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
+    }
+
 }
